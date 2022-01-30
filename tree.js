@@ -72,6 +72,24 @@ class Bst {
 
     traversal(this.root)
   }
+  levelOrderTraversal(visitor) {
+    if (!this.root || !visitor) return
+    let stack = [this.root]
+    let index = 0
+    let currentNode = null
+
+    while (currentNode = stack[index++]) {
+      visitor.visit(currentNode)
+
+      if (currentNode.left) {
+        stack.push(currentNode.left)
+      }
+
+      if (currentNode.right) {
+        stack.push(currentNode.right)
+      }
+    }
+  }
 }
 
 
@@ -107,4 +125,12 @@ bst.postorderTraversal({
   visit: (node) => {
     console.log('****', node.element);
   }
-})
+}) 
+
+// 层序遍历
+console.log("====================");
+bst.levelOrderTraversal({
+  visit: (node) => {
+    console.log('****', node.element);
+  }
+}) 
