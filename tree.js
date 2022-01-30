@@ -42,6 +42,36 @@ class Bst {
       }
     }
   }
+  preorderTraversal(visitor) {
+    const traversal = (node) => {
+      if (!node) return
+      visitor.visit(node)
+      traversal(node.left);
+      traversal(node.right)
+    }
+
+    traversal(this.root)
+  }
+  inorderTraversal(visitor) {
+    const traversal = (node) => {
+      if (!node) return
+      traversal(node.left);
+      visitor.visit(node)
+      traversal(node.right)
+    }
+
+    traversal(this.root)
+  }
+  postorderTraversal(visitor) {
+    const traversal = (node) => {
+      if (!node) return
+      traversal(node.left);
+      visitor.visit(node)
+      traversal(node.right)
+    }
+
+    traversal(this.root)
+  }
 }
 
 
@@ -52,4 +82,29 @@ arr.forEach(v => {
   bst.append(v)
 })
 
-console.log(bst.root);
+// console.log(bst.root);
+
+
+// 4种遍历方法
+// 前序遍历
+bst.preorderTraversal({
+  visit: (node) => {
+    console.log('****', node.element);
+  }
+})
+console.log("====================");
+
+// 中序遍历
+bst.inorderTraversal({
+  visit: (node) => {
+    console.log('****', node.element);
+  }
+})
+
+// 后序遍历
+console.log("====================");
+bst.postorderTraversal({
+  visit: (node) => {
+    console.log('****', node.element);
+  }
+})
