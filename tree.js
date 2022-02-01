@@ -89,6 +89,29 @@ class Bst {
         stack.push(currentNode.right)
       }
     }
+    stack = null
+  }
+  invertTree() {   // 反转二叉树   
+    if (!this.root) return
+    let stack = [this.root]
+    let index = 0
+    let currentNode = null
+
+    while (currentNode = stack[index++]) {
+      let temp = currentNode.left
+      currentNode.left = currentNode.right
+      currentNode.right = temp
+
+      if (currentNode.left) {
+        stack.push(currentNode.left)
+      }
+
+      if (currentNode.right) {
+        stack.push(currentNode.right)
+      }
+    }
+    stack = null
+    return this.root
   }
 }
 
@@ -134,3 +157,8 @@ bst.levelOrderTraversal({
     console.log('****', node.element);
   }
 }) 
+
+console.log("反转");
+console.dir(bst.invertTree(), {
+  depth: 100
+});
